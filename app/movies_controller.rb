@@ -27,9 +27,10 @@ def can_be_created_in_a_block(args = {title: "Home Alone", release_date: 1990})
   # If no arguments are passed, use default values:
   # title == "Home Alone"
   # release_date == 1990
+
   Movie.create do |m|
-    m.title = "#{args[:title]}"
-    m.release_date = "#{args[:release_date]}"
+    m.title = args[:title]
+    m.release_date = args[:release_date]
   end
 end
 
@@ -54,7 +55,7 @@ def can_find_by_multiple_attributes
   # title == "Title"
   # release_date == 2000
   # director == "Me"
-  Movie.find_by(title: "Title", release_date: 2000, director: 'Me')
+  Movie.find_by(title: "Title", release_date: 2000, director: "Me")
 end
 
 def can_find_using_where_clause_and_be_sorted
@@ -65,7 +66,6 @@ end
 
 def can_be_found_updated_and_saved
   # Update the title "Awesome Flick" to "Even Awesomer Flick", save it, then return it
-  Movie.create(title: "Awesome Flick")
   movie = Movie.find_by(title: "Awesome Flick")
   movie.update(title: "Even Awesomer Flick")
   movie.save
@@ -88,9 +88,7 @@ end
 
 def can_destroy_a_single_item
   Movie.create(title: "That One Where the Guy Kicks Another Guy Once")
-  movie = Movie.find_by(title: "That One Where the Guy Kicks Another Guy Once")
-  movie.destroy
-  Movie.destroy_all
+  movie = Movie.find_by(title: "That One Where the Guy Kicks Another Guy Once").destroy
 end
 
 def can_destroy_all_items_at_once
